@@ -5,6 +5,7 @@ namespace MainlyCode\HipChat;
 use MainlyCode\Stream\ReadStream;
 use MainlyCode\Stream\WriteStream;
 use MainlyCode\Xmpp\Client as BaseClient;
+use MainlyCode\Xmpp\Connection;
 use React\Stream\Stream;
 
 class Client extends BaseClient
