@@ -86,6 +86,13 @@ class WriteStream extends ReadableStream
         $this->send(sprintf('<message to="%s" from="%s" type="groupchat" xml:lang="en"><body>%s</body></message>', $room->getId(), $from->getId(), $message));
     }
 
+    public function xmppMessageTo(JabberId $to, JabberId $from, $message)
+    {
+        $message = $this->xmlEncode($message);
+
+        $this->send(sprintf('<message to="%s" from="%s" type="chat" xml:lang="en"><body>%s</body></message>', $to->getId(), $from->getId(), $message));
+    }
+
     /**
      * @param JabberId    $jabberId
      * @param string|null $show
@@ -115,6 +122,11 @@ class WriteStream extends ReadableStream
     public function xmppRoomInfo(JabberId $jabberId, JabberId $roomId)
     {
         $this->send(sprintf('<iq type="get" from="%s" id="discover_rooms_1" to="%s"><query xmlns="http://jabber.org/protocol/disco#info" /></iq>', $jabberId->getId(), $roomId->getId()));
+    }
+
+    public function xmppProfileInfo(JabberId $from, JabberId $to)
+    {
+        $this->send(sprintf('<iq type="get" from="%s" to="%s"><vCard xmlns="vcard-temp"/></iq>', $from->getId(), $to->getId()));
     }
 
     /**
