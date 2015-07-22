@@ -58,6 +58,11 @@ class Connection
         return $this->host;
     }
 
+    public function getPort()
+    {
+        return $this->port;
+    }
+
     /**
      * @return string
      */
